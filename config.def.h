@@ -11,6 +11,7 @@ static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display 
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
+static const unsigned int colorfultag = 1; /* 0 means use SchemeSel for selected tag */
 static const int barspacing         = 2;        /* vertical padding for statusbar */
 static const int vertpad            = 10;       /* vertical padding of bar */
 static const int sidepad            = 10;       /* horizontal padding of bar */
@@ -58,12 +59,21 @@ static char *termcolor[] = {
 };
 static char *colors[][3] = {
        /*               fg           bg           border   */
-       [SchemeNorm] = { normfgcolor, normbgcolor, normbordercolor },
-       [SchemeSel]  = { selfgcolor,  selbgcolor,  selbordercolor  },
+	[SchemeNorm]       = { normfgcolor,   normbgcolor,  normbordercolor },
+	[SchemeSel]        = { selfgcolor,    selbgcolor,   selbordercolor  },
+	[SchemeTag]        = { normfgcolor,   normbgcolor,  normbordercolor },
+	[SchemeTag1]       = { termcol1,      normbgcolor,  normbordercolor },
+	[SchemeTag2]       = { termcol2,      normbgcolor,  normbordercolor },
+	[SchemeTag3]       = { termcol3,      normbgcolor,  normbordercolor },
+	[SchemeTag4]       = { termcol4,      normbgcolor,  normbordercolor },
+	[SchemeTag5]       = { termcol5,      normbgcolor,  normbordercolor },
+	[SchemeTag6]       = { termcol6,      normbgcolor,  normbordercolor },
+	[SchemeLayout]     = { termcol3,      normbgcolor,  normbordercolor },
 };
 
 /* tagging */
 static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9" };
+static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5 };
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
