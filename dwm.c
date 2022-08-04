@@ -88,7 +88,8 @@
 
 /* enums */
 enum { CurNormal, CurResize, CurMove, CurLast }; /* cursor */
-enum { SchemeNorm, SchemeSel, SchemeTag, SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5, SchemeTag6, SchemeLayout }; /* color schemes */
+//enum { SchemeNorm, SchemeSel, SchemeTag, SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5, SchemeTag6, SchemeLayout }; /* color schemes */
+enum { SchemeNorm, SchemeSel, SchemeTag, SchemeTag1Fil, SchemeTag1Free, SchemeTag2Fil, SchemeTag2Free, SchemeTag3Fil, SchemeTag3Free, SchemeTag4Fil, SchemeTag4Free, SchemeTag5Fil, SchemeTag5Free, SchemeTag6Fil, SchemeTag6Free, SchemeLayout }; /* color schemes */
 enum { NetSupported, NetWMName, NetWMState, NetWMCheck,
        NetSystemTray, NetSystemTrayOP, NetSystemTrayOrientation, NetSystemTrayOrientationHorz,
        NetWMFullscreen, NetActiveWindow, NetWMWindowType,
@@ -990,7 +991,13 @@ drawbar(Monitor *m)
 	x = 0;
 	for (i = 0; i < LENGTH(tags); i++) {
 		w = TEXTW(tags[i]);
-		drw_setscheme(drw, scheme[occ & 1 << i ? (colorfultag ? tagschemes[i] : SchemeSel) : SchemeTag]);
+		drw_setscheme(drw, scheme[occ & 1 << i ? 
+			(colorfultag ? 
+			 	(m == selmon && selmon->sel && selmon->sel->tags & 1 << i ?
+				 	filledtagschemes[i] : freetagschemes[i]) 
+				: SchemeSel) 
+			: SchemeTag]);
+		//drw_setscheme(drw, scheme[occ & 1 << i ? (colorfultag ? tagschemes[i] : SchemeSel) : SchemeTag]);
 		//drw_setscheme(drw, scheme[m->tagset[m->seltags] & 1 << i ? SchemeSel : SchemeNorm]);
 		drw_text(drw, x, 0, w, bh, lrpad / 2, tags[i], urg & 1 << i);
 		if (ulineall || m->tagset[m->seltags] & 1 << i) /* if there are conflicts, just move these lines directly underneath both 'drw_setscheme' and 'drw_text' :) */
@@ -1009,7 +1016,7 @@ drawbar(Monitor *m)
 			drw_setscheme(drw, scheme[m == selmon ? SchemeSel : SchemeNorm]);
 			drw_text(drw, x, barspacing / 2, w - 2 * sp, bh - barspacing, lrpad / 2, m->sel->name, 0);
 			if (m->sel->isfloating)
-				drw_rect(drw, x + boxs, boxs, boxw, boxw, m->sel->isfixed, 0);
+				drw_rect(drw, x + boxs, boxs + barspacing / 2, boxw, boxw, m->sel->isfixed, 0);
 		} else {
 			drw_setscheme(drw, scheme[SchemeNorm]);
 			drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);

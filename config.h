@@ -63,19 +63,26 @@ static char *colors[][3] = {
 	[SchemeNorm]       = { normfgcolor,   normbgcolor,  normbordercolor },
 	[SchemeSel]        = { selfgcolor,    selbgcolor,   selbordercolor  },
 	[SchemeTag]        = { normfgcolor,   normbgcolor,  normbordercolor },
-	[SchemeTag1]       = { termcol1,      normbgcolor,  normbordercolor },
-	[SchemeTag2]       = { termcol2,      normbgcolor,  normbordercolor },
-	[SchemeTag3]       = { termcol3,      normbgcolor,  normbordercolor },
-	[SchemeTag4]       = { termcol4,      normbgcolor,  normbordercolor },
-	[SchemeTag5]       = { termcol5,      normbgcolor,  normbordercolor },
-	[SchemeTag6]       = { termcol6,      normbgcolor,  normbordercolor },
-	[SchemeLayout]     = { termcol11,     normbgcolor,  normbordercolor },
+	[SchemeTag1Fil]    = { termcol9,      termcol8,     termcol0        },
+	[SchemeTag1Free]   = { termcol9,      termcol0,     termcol0        },
+	[SchemeTag2Fil]    = { termcol10,     termcol8,     termcol0        },
+	[SchemeTag2Free]   = { termcol10,     termcol0,     termcol0        },
+	[SchemeTag3Fil]    = { termcol13,     termcol8,     termcol0        },
+	[SchemeTag3Free]   = { termcol13,     termcol0,     termcol0        },
+	[SchemeTag4Fil]    = { termcol12,     termcol8,     termcol0        },
+	[SchemeTag4Free]   = { termcol12,     termcol0,     termcol0        },
+	[SchemeTag5Fil]    = { termcol11,     termcol8,     termcol0        },
+	[SchemeTag5Free]   = { termcol11,     termcol0,     termcol0        },
+	[SchemeTag6Fil]    = { termcol14,     termcol8,     termcol0        },
+	[SchemeTag6Free]   = { termcol14,     termcol0,     termcol0        },
+	[SchemeLayout]     = { termcol11,     termcol0,     termcol0        },
 };
 
 /* tagging */
 //static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
 static const char *tags[] = { "", "", "", "", "", "" };
-static const int tagschemes[] = { SchemeTag1, SchemeTag2, SchemeTag3, SchemeTag4, SchemeTag5, SchemeTag6 };
+static const int filledtagschemes[] = { SchemeTag1Fil, SchemeTag2Fil, SchemeTag3Fil, SchemeTag4Fil, SchemeTag5Fil, SchemeTag6Fil };
+static const int freetagschemes[] = { SchemeTag1Free, SchemeTag2Free, SchemeTag3Free, SchemeTag4Free, SchemeTag5Free, SchemeTag6Free };
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
 static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
@@ -121,13 +128,15 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_recent", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *j4dmenucmd[] = { "j4-dmenu-desktop", "--term", "st", "--no-generic", "--usage-log", "./.cache/j4-dmenu-desktop/recent", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
 #include "movestack.c"
 static Key keys[] = {
 	/* modifier                     key        function        argument */
-	{ MODKEY,                       XK_p,      spawn,          {.v = dmenucmd } },
+	{ MODKEY,                       XK_p,      spawn,          {.v = j4dmenucmd } },
+	{ MODKEY|ShiftMask,             XK_p,      spawn,          {.v = dmenucmd } },
 	{ MODKEY|ShiftMask,             XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
