@@ -2,22 +2,25 @@
 
 /* appearance */
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
-static const unsigned int gappx     = 15;        /* gaps between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+//static const unsigned int gappx     = 8;        /* gaps between windows */
+static const unsigned int gappx     = 14;        /* gaps between windows */
+static const unsigned int snap      = 8;       /* snap pixel */
 static const unsigned int systraypinning = 0;   /* 0: sloppy systray follows selected monitor, >0: pin systray to monitor X */
 static const unsigned int systrayonleft = 0;   	/* 0: systray in the right corner, >0: systray on left of status text */
-static const unsigned int systrayspacing = 2;   /* systray spacing */
+static const unsigned int systrayspacing = 7;   /* systray spacing */
 static const int systraypinningfailfirst = 1;   /* 1: if pinning fails, display systray on the first monitor, False: display systray on the last monitor*/
 static const int showsystray        = 1;     /* 0 means no systray */
 static const int showbar            = 1;     /* 0 means no bar */
 static const int topbar             = 1;     /* 0 means bottom bar */
 static const unsigned int colorfultag = 1; /* 0 means use SchemeSel for selected tag */
-static const int barspacing         = 10;        /* vertical padding for statusbar */
-static const int vertpad            = 10;       /* vertical padding of bar */
-static const int sidepad            = 15;       /* horizontal padding of bar */
-static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Medium:size=12:antialias=true:autohint=true",
-                                        "Material Design Icons Desktop:size=12" };
-static const char dmenufont[]       = "JetBrainsMono Nerd Font:style=Medium:size=12:antialias=true:autohint=true";
+static const int barspacing         = 12;        /* vertical padding for statusbar */
+//static const int vertpad            = 8;       /* vertical padding of bar */
+//static const int sidepad            = 8;       /* horizontal padding of bar */
+static const int vertpad            = 0;       /* vertical padding of bar */
+static const int sidepad            = 0;       /* horizontal padding of bar */
+static const char *fonts[]          = { "JetBrainsMono Nerd Font:style=Medium:size=11:antialias=true:autohint=true",
+                                        "Material Design Icons Desktop:size=11" };
+static const char dmenufont[]       = "JetBrainsMono Nerd Font:style=Medium:size=11:antialias=true:autohint=true";
 static char normbgcolor[]           = "#222222";
 static char normbordercolor[]       = "#444444";
 static char normfgcolor[]           = "#bbbbbb";
@@ -63,29 +66,29 @@ static char *colors[][3] = {
 	[SchemeNorm]       = { normfgcolor,   normbgcolor,  normbordercolor },
 	[SchemeSel]        = { selfgcolor,    selbgcolor,   selbordercolor  },
 	[SchemeTag]        = { normfgcolor,   normbgcolor,  normbordercolor },
-	[SchemeTag1Fil]    = { termcol9,      termcol8,     termcol0        },
-	[SchemeTag1Free]   = { termcol9,      termcol0,     termcol0        },
-	[SchemeTag2Fil]    = { termcol10,     termcol8,     termcol0        },
-	[SchemeTag2Free]   = { termcol10,     termcol0,     termcol0        },
-	[SchemeTag3Fil]    = { termcol13,     termcol8,     termcol0        },
-	[SchemeTag3Free]   = { termcol13,     termcol0,     termcol0        },
-	[SchemeTag4Fil]    = { termcol12,     termcol8,     termcol0        },
-	[SchemeTag4Free]   = { termcol12,     termcol0,     termcol0        },
-	[SchemeTag5Fil]    = { termcol11,     termcol8,     termcol0        },
-	[SchemeTag5Free]   = { termcol11,     termcol0,     termcol0        },
-	[SchemeTag6Fil]    = { termcol14,     termcol8,     termcol0        },
-	[SchemeTag6Free]   = { termcol14,     termcol0,     termcol0        },
-	[SchemeLayout]     = { termcol11,     termcol0,     termcol0        },
+	[SchemeTag1Fil]    = { termcol1,      termcol8,     normbordercolor },
+	[SchemeTag1Free]   = { termcol1,      normbgcolor,  normbordercolor },
+	[SchemeTag2Fil]    = { termcol2,      termcol8,     normbordercolor },
+	[SchemeTag2Free]   = { termcol2,      normbgcolor,  normbordercolor },
+	[SchemeTag3Fil]    = { termcol3,      termcol8,     normbordercolor },
+	[SchemeTag3Free]   = { termcol3,      normbgcolor,  normbordercolor },
+	[SchemeTag4Fil]    = { termcol4,      termcol8,     normbordercolor },
+	[SchemeTag4Free]   = { termcol4,      normbgcolor,  normbordercolor },
+	[SchemeTag5Fil]    = { termcol5,      termcol8,     normbordercolor },
+	[SchemeTag5Free]   = { termcol5,      normbgcolor,  normbordercolor },
+	[SchemeTag6Fil]    = { termcol6,      termcol8,     normbordercolor },
+	[SchemeTag6Free]   = { termcol6,      normbgcolor,  normbordercolor },
+	[SchemeLayout]     = { termcol10,     normbgcolor,  normbordercolor },
 };
 
 /* tagging */
-//static const char *tags[] = { "1", "2", "3", "4", "5", "6" };
-static const char *tags[] = { "", "", "", "", "", "" };
+//static const char *tags[] = { "", "", "", "", "", "" };
+static const char *tags[] = { "󰆍", "󰓓", "󰙯", "󰈹", "󰣨", "󰎆" };
 static const int filledtagschemes[] = { SchemeTag1Fil, SchemeTag2Fil, SchemeTag3Fil, SchemeTag4Fil, SchemeTag5Fil, SchemeTag6Fil };
 static const int freetagschemes[] = { SchemeTag1Free, SchemeTag2Free, SchemeTag3Free, SchemeTag4Free, SchemeTag5Free, SchemeTag6Free };
 
 static const unsigned int ulinepad	= 5;	/* horizontal padding between the underline and tag */
-static const unsigned int ulinestroke	= 2;	/* thickness / height of the underline */
+static const unsigned int ulinestroke	= 3;	/* thickness / height of the underline */
 static const unsigned int ulinevoffset	= 0;	/* how far above the bottom of the bar the line should appear */
 static const int ulineall 		= 0;	/* 1 to show underline on all tags, 0 for just the active ones */
 
@@ -95,12 +98,15 @@ static const Rule rules[] = {
 	 *	WM_NAME(STRING) = title
 	 */
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Gimp",     NULL,       NULL,       0,            1,           -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 8,       0,           -1 },
+	{ "Steam",    NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "discord",  NULL,       NULL,       1 << 2,       0,           -1 },
+	{ "VSCodium", NULL,       NULL,       1 << 1,       0,           -1 },
+	{ "Chromium-bin-browser-chromium", NULL,       NULL,       1 << 3,       0,           -1 },
+	{ "firefox", NULL,       NULL,       1 << 3,       0,           -1 },
 };
 
 /* layout(s) */
-static const float mfact     = 0.55; /* factor of master area size [0.05..0.95] */
+static const float mfact     = 0.6; /* factor of master area size [0.05..0.95] */
 static const int nmaster     = 1;    /* number of clients in master area */
 static const int resizehints = 1;    /* 1 means respect size hints in tiled resizals */
 static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen window */
@@ -128,7 +134,7 @@ static const Layout layouts[] = {
 
 /* commands */
 static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() */
-static const char *dmenucmd[] = { "dmenu_recent", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
+static const char *dmenucmd[] = { "dmenu_run", "-m", dmenumon, "-fn", dmenufont, "-nb", normbgcolor, "-nf", normfgcolor, "-sb", selbordercolor, "-sf", selfgcolor, NULL };
 static const char *j4dmenucmd[] = { "j4-dmenu-desktop", "--term", "st", "--no-generic", "--usage-log", "./.cache/j4-dmenu-desktop/recent", NULL };
 static const char *termcmd[]  = { "st", NULL };
 
